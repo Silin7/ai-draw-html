@@ -419,6 +419,40 @@
       background-color: #d9e2ec;
     }
 
+    .unit-name-container {
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 100;
+      width: 80%;
+      max-width: 500px;
+      text-align: center;
+    }
+
+    .unit-name-input {
+      width: 100%;
+      padding: 12px 20px;
+      font-size: 16px;
+      font-weight: bold;
+      text-align: center;
+      border: 2px solid #e2e8f0;
+      border-radius: 8px;
+      background: white;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      outline: none;
+      transition: all 0.3s ease;
+    }
+
+    .unit-name-input:focus {
+      border-color: #3b82f6;
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    }
+
+    .unit-name-input::placeholder {
+      color: #94a3b8;
+    }
+
     #designCanvas {
       display: block;
       width: 100%;
@@ -1388,6 +1422,9 @@
       </div>
 
       <div class="canvas-container" id="canvasContainer">
+        <div class="unit-name-container">
+          <input type="text" id="unitNameInput" placeholder="请输入单位名称" class="unit-name-input">
+        </div>
         <canvas id="designCanvas" width="1189" height="841"></canvas>
       </div>
 
@@ -1831,6 +1868,18 @@
           ctx.beginPath(); ctx.moveTo(0, i); ctx.lineTo(canvas.width, i); ctx.stroke();
         }
         ctx.restore();
+
+        // 绘制单位名称
+        if (currentUnitName.trim()) {
+          ctx.save();
+          ctx.font = 'bold 28px "Microsoft YaHei", "PingFang SC", "SimHei", sans-serif';
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'top';
+          ctx.fillStyle = '#333';
+          const topMargin = 24;
+          ctx.fillText(currentUnitName.trim(), canvas.width / 2, topMargin);
+          ctx.restore();
+        }
 
         // 绘制所有元素
         elements.forEach(el => {
@@ -2513,9 +2562,19 @@
         link.click();
       });
 
+      // 单位名称变量
+      let currentUnitName = '';
+
+      // 单位名称输入事件监听
+      const unitNameInput = document.getElementById('unitNameInput');
+      if (unitNameInput) {
+        unitNameInput.addEventListener('input', (e) => {
+          currentUnitName = e.target.value;
+          redrawCanvas();
+        });
+      }
+
       document.getElementById('savePdfBtn').addEventListener('click', () => {
-        const unitName = prompt('请输入单位名称（将显示在图纸顶部居中）：', '');
-        if (unitName == null) return; // 用户取消
         const JsPDF = (typeof jspdf !== 'undefined' ? jspdf : window.jspdf);
         if (!JsPDF || !JsPDF.jsPDF) {
           alert('PDF 库未加载，请检查网络或刷新页面重试');
@@ -2527,7 +2586,9 @@
         ctx.textBaseline = 'top';
         ctx.fillStyle = '#333';
         const topMargin = 24;
-        ctx.fillText(unitName.trim(), canvas.width / 2, topMargin);
+        if (currentUnitName.trim()) {
+          ctx.fillText(currentUnitName.trim(), canvas.width / 2, topMargin);
+        }
         const imgData = canvas.toDataURL('image/png');
         ctx.restore();
         redrawCanvas();
