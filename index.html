@@ -150,6 +150,86 @@
       box-shadow: 4px 0 10px rgba(0, 0, 0, 0.02);
     }
 
+    .history-panel {
+      width: 260px;
+      background: #f5faff;
+      border-left: 2px solid #b9cde0;
+      padding: 16px 12px;
+      overflow-y: auto;
+      box-shadow: -4px 0 10px rgba(0, 0, 0, 0.02);
+      display: flex;
+      flex-direction: column;
+    }
+    .history-panel .history-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #466282;
+      margin-bottom: 12px;
+      padding-left: 8px;
+      border-left: 3px solid #2a5a8c;
+    }
+    .history-panel .history-save-btn {
+      width: 100%;
+      padding: 10px 12px;
+      margin-bottom: 16px;
+      background: #2a5a8c;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 13px;
+      cursor: pointer;
+    }
+    .history-panel .history-save-btn:hover {
+      background: #3a6a9c;
+    }
+    .history-panel .history-list {
+      flex: 1;
+      overflow-y: auto;
+    }
+    .history-item {
+      background: #fff;
+      border: 1px solid #b9cde0;
+      border-radius: 8px;
+      padding: 10px 12px;
+      margin-bottom: 10px;
+      font-size: 12px;
+      color: #466282;
+    }
+    .history-item .history-item-time {
+      margin-bottom: 8px;
+      color: #2c4051;
+    }
+    .history-item .history-item-actions {
+      display: flex;
+      gap: 8px;
+      margin-top: 8px;
+    }
+    .history-item .history-item-actions button {
+      flex: 1;
+      padding: 6px 8px;
+      font-size: 12px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .history-item .history-item-actions .btn-edit {
+      background: #2a5a8c;
+      color: #fff;
+    }
+    .history-item .history-item-actions .btn-delete {
+      background: #c44;
+      color: #fff;
+    }
+    .history-item .history-item-actions button:hover {
+      opacity: 0.9;
+    }
+    .history-empty {
+      color: #90a9c2;
+      font-size: 12px;
+      text-align: center;
+      padding: 20px 0;
+    }
+
     .library-section {
       margin-bottom: 28px;
     }
@@ -383,6 +463,7 @@
 
       .toolbar,
       .library-panel,
+      .history-panel,
       .status-bar,
       .text-editor {
         display: none;
@@ -423,52 +504,20 @@
 
     <div class="workspace">
       <div class="library-panel">
-        <div class="library-section collapsible" data-section="enclosure">
-          <div class="lib-title">围护结构</div>
+        <div class="library-section collapsible" data-section="basic-component">
+          <div class="lib-title">基础组件</div>
           <div class="lib-items lib-items-grid">
-            <div class="lib-item" draggable="true" data-type="wall" data-shape="line" data-label="墙体">
-              <div class="lib-shape">📏</div><span>直线墙体</span>
+            <div class="lib-item" draggable="true" data-type="basic-rect" data-shape="rect" data-label="矩形">
+              <div class="lib-shape">▭</div><span>矩形</span>
             </div>
-            <div class="lib-item" draggable="true" data-type="door" data-shape="door-pro" data-label="入户门">
-              <div class="lib-shape door-preview">🚪</div><span>入户门</span>
+            <div class="lib-item" draggable="true" data-type="sector" data-shape="rect" data-label="扇形">
+              <div class="lib-shape">◔</div><span>扇形</span>
             </div>
-            <div class="lib-item" draggable="true" data-type="window" data-shape="rect" data-label="窗户">
-              <div class="lib-shape">🪟</div><span>窗户</span>
+            <div class="lib-item" draggable="true" data-type="basic-circle" data-shape="circle" data-label="圆形">
+              <div class="lib-shape circle">●</div><span>圆形</span>
             </div>
-          </div>
-        </div>
-        <div class="library-section collapsible" data-section="indoor-facility">
-          <div class="lib-title">室内设施</div>
-          <div class="lib-items lib-items-grid">
-            <div class="lib-item" draggable="true" data-type="counter" data-shape="rect" data-label="操作台">
-              <div class="lib-shape">🔪</div><span>操作台</span>
-            </div>
-            <div class="lib-item" draggable="true" data-type="shelf" data-shape="rect" data-label="货架">
-              <div class="lib-shape">📦</div><span>货架</span>
-            </div>
-            <div class="lib-item" draggable="true" data-type="sink" data-shape="rect" data-label="洗手池">
-              <div class="lib-shape">💧</div><span>洗手池</span>
-            </div>
-            <div class="lib-item" draggable="true" data-type="disinfector" data-shape="rect" data-label="消毒柜">
-              <div class="lib-shape">🧼</div><span>消毒柜</span>
-            </div>
-            <div class="lib-item" draggable="true" data-type="fridge" data-shape="rect" data-label="冰箱">
-              <div class="lib-shape">❄️</div><span>冰箱</span>
-            </div>
-            <div class="lib-item" draggable="true" data-type="freezer" data-shape="rect" data-label="冰柜">
-              <div class="lib-shape">🧊</div><span>冰柜</span>
-            </div>
-            <div class="lib-item" draggable="true" data-type="table" data-shape="rect" data-label="餐桌">
-              <div class="lib-shape">🍽️</div><span>餐桌</span>
-            </div>
-            <div class="lib-item" draggable="true" data-type="cabinet" data-shape="rect" data-label="柜子">
-              <div class="lib-shape">🗄️</div><span>柜子</span>
-            </div>
-            <div class="lib-item" draggable="true" data-type="stove" data-shape="circle" data-label="灶台">
-              <div class="lib-shape circle">🔥</div><span>灶台</span>
-            </div>
-            <div class="lib-item" draggable="true" data-type="bed" data-shape="rect" data-label="床">
-              <div class="lib-shape">🛏️</div><span>床</span>
+            <div class="lib-item" draggable="true" data-type="ruler" data-shape="rect" data-label="标尺">
+              <div class="lib-shape">📏</div><span>标尺</span>
             </div>
           </div>
         </div>
@@ -477,41 +526,455 @@
           <div class="lib-items">
             <div class="library-section collapsible collapsed" data-section="general-facility">
               <div class="lib-title">通用设施</div>
+              <div class="lib-items lib-items-grid">
+                <div class="lib-item" draggable="true" data-type="fly-lamp" data-shape="rect" data-label="灭蝇灯">
+                  <div class="lib-shape">💡</div><span>灭蝇灯</span>
+                </div>
+                <div class="lib-item" draggable="true" data-type="fire-extinguisher" data-shape="rect" data-label="灭火器">
+                  <div class="lib-shape">🧯</div><span>灭火器</span>
+                </div>
+                <div class="lib-item" draggable="true" data-type="mouse-board" data-shape="rect" data-label="粘鼠板">
+                  <div class="lib-shape">🐭</div><span>粘鼠板</span>
+                </div>
+                <div class="lib-item" draggable="true" data-type="air-conditioner" data-shape="rect" data-label="空调">
+                  <div class="lib-shape">❄️</div><span>空调</span>
+                </div>
+                <div class="lib-item" draggable="true" data-type="fan" data-shape="rect" data-label="电风扇">
+                  <div class="lib-shape">🌀</div><span>电风扇</span>
+                </div>
+                <div class="lib-item" draggable="true" data-type="dust-curtain" data-shape="rect" data-label="防尘帘">
+                  <div class="lib-shape">🪟</div><span>防尘帘</span>
+                </div>
+                <div class="lib-item" draggable="true" data-type="air-curtain" data-shape="rect" data-label="风幕机">
+                  <div class="lib-shape">💨</div><span>风幕机</span>
+                </div>
+                <div class="lib-item" draggable="true" data-type="screen-window" data-shape="rect" data-label="纱窗">
+                  <div class="lib-shape">🪟</div><span>纱窗</span>
+                </div>
+                <div class="lib-item" draggable="true" data-type="trash" data-shape="rect" data-label="垃圾桶">
+                  <div class="lib-shape">🗑️</div><span>垃圾桶</span>
+                </div>
+                <div class="lib-item" draggable="true" data-type="system-board" data-shape="rect" data-label="制度牌">
+                  <div class="lib-shape">📋</div><span>制度牌</span>
+                </div>
+              </div>
+            </div>
+            <div class="library-section collapsible collapsed" data-section="supermarket-store">
+              <div class="lib-title">超市、商店、调料店、商贸公司</div>
               <div class="lib-items">
-                <div class="library-section collapsible collapsed" data-section="mosquito-lamp">
-                  <div class="lib-title">灭蚊灯</div>
-                  <div class="lib-items">
-                    <div class="lib-item" draggable="true" data-type="mosquito-lamp" data-shape="rect" data-label="灭蚊灯">
-                      <div class="lib-shape">💡</div><span>灭蚊灯1</span>
+                <div class="library-section collapsible collapsed" data-section="prepackaged-sale">
+                  <div class="lib-title">预包装食品（含冷藏冷冻）销售</div>
+                  <div class="lib-items lib-items-grid">
+                    <div class="lib-item" draggable="true" data-type="cold-display" data-shape="rect" data-label="冷藏柜">
+                      <div class="lib-shape">❄️</div><span>冷藏柜</span>
                     </div>
-                    <div class="lib-item" draggable="true" data-type="mosquito-lamp" data-shape="rect" data-label="灭蚊灯">
-                      <div class="lib-shape">💡</div><span>灭蚊灯2</span>
+                    <div class="lib-item" draggable="true" data-type="shelf" data-shape="rect" data-label="货架">
+                      <div class="lib-shape">📦</div><span>货架</span>
+                    </div>
+                    <div class="lib-item" draggable="true" data-type="freezer" data-shape="rect" data-label="冷冻柜">
+                      <div class="lib-shape">🧊</div><span>冷冻柜</span>
+                    </div>
+                    <div class="lib-item" draggable="true" data-type="cold-storage" data-shape="rect" data-label="冷库">
+                      <div class="lib-shape">🏠</div><span>冷库</span>
+                    </div>
+                    <div class="lib-item" draggable="true" data-type="warehouse" data-shape="rect" data-label="仓库">
+                      <div class="lib-shape">📦</div><span>仓库</span>
+                    </div>
+                    <div class="lib-item" draggable="true" data-type="desk" data-shape="rect" data-label="办公桌">
+                      <div class="lib-shape">🪑</div><span>办公桌</span>
+                    </div>
+                    <div class="lib-item" draggable="true" data-type="food-area" data-shape="rect" data-label="食品区">
+                      <div class="lib-shape">🍎</div><span>食品区</span>
+                    </div>
+                    <div class="lib-item" draggable="true" data-type="non-food-area" data-shape="rect" data-label="非食品区">
+                      <div class="lib-shape">📦</div><span>非食品区</span>
                     </div>
                   </div>
                 </div>
-                <div class="library-section collapsible collapsed" data-section="fire-extinguisher">
-                  <div class="lib-title">灭火器</div>
-                  <div class="lib-items">
-                    <div class="lib-item" draggable="true" data-type="fire-extinguisher" data-shape="rect"
-                      data-label="灭火器">
-                      <div class="lib-shape">🧯</div><span>灭火器</span>
+                <div class="library-section collapsible collapsed" data-section="network-sale">
+                  <div class="lib-title">网络经营</div>
+                  <div class="lib-items lib-items-grid">
+                    <div class="lib-item" draggable="true" data-type="computer" data-shape="rect" data-label="电脑">
+                      <div class="lib-shape">💻</div><span>电脑</span>
+                    </div>
+                    <div class="lib-item" draggable="true" data-type="printer" data-shape="rect" data-label="打印机">
+                      <div class="lib-shape">🖨️</div><span>打印机</span>
                     </div>
                   </div>
                 </div>
-                <div class="library-section collapsible collapsed" data-section="mouse-board">
-                  <div class="lib-title">粘鼠板</div>
-                  <div class="lib-items">
-                    <div class="lib-item" draggable="true" data-type="mouse-board" data-shape="rect" data-label="粘鼠板">
-                      <div class="lib-shape">🐭</div><span>粘鼠板</span>
+                <div class="library-section collapsible collapsed" data-section="bulk-cold-sale">
+                  <div class="lib-title">散装食品（含冷藏冷冻）销售</div>
+                  <div class="lib-items lib-items-grid">
+                    <div class="lib-item" draggable="true" data-type="bulk-freezer" data-shape="rect" data-label="冷冻柜（散装食品容器）">
+                      <div class="lib-shape">🧊</div><span>冷冻柜（散装食品容器）</span>
+                    </div>
+                    <div class="lib-item" draggable="true" data-type="cold-storage" data-shape="rect" data-label="冷库">
+                      <div class="lib-shape">🏠</div><span>冷库</span>
+                    </div>
+                    <div class="lib-item" draggable="true" data-type="bulk-container" data-shape="rect" data-label="散装食品容器">
+                      <div class="lib-shape">📦</div><span>散装食品容器</span>
+                    </div>
+                    <div class="lib-item" draggable="true" data-type="bulk-sign" data-shape="rect" data-label="散装食品标识牌">
+                      <div class="lib-shape">📋</div><span>散装食品标识牌</span>
                     </div>
                   </div>
                 </div>
-                <div class="library-section collapsible collapsed" data-section="air-conditioner">
-                  <div class="lib-title">空调</div>
-                  <div class="lib-items">
-                    <div class="lib-item" draggable="true" data-type="air-conditioner" data-shape="rect"
-                      data-label="空调">
-                      <div class="lib-shape">❄️</div><span>空调</span>
+                <div class="library-section collapsible collapsed" data-section="bulk-room-sale">
+                  <div class="lib-title">散装食品（不含冷藏冷冻）销售</div>
+                  <div class="lib-items lib-items-grid">
+                    <div class="lib-item" draggable="true" data-type="bulk-counter" data-shape="rect" data-label="散装食品货柜">
+                      <div class="lib-shape">📦</div><span>散装食品货柜</span>
+                    </div>
+                    <div class="lib-item" draggable="true" data-type="bulk-sign" data-shape="rect" data-label="散装食品标识牌">
+                      <div class="lib-shape">📋</div><span>散装食品标识牌</span>
+                    </div>
+                    <div class="lib-item" draggable="true" data-type="shelf" data-shape="rect" data-label="货架">
+                      <div class="lib-shape">📦</div><span>货架</span>
+                    </div>
+                    <div class="lib-item" draggable="true" data-type="tray" data-shape="rect" data-label="托盘">
+                      <div class="lib-shape">▭</div><span>托盘</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="library-section collapsible collapsed" data-section="special-food-sale">
+                  <div class="lib-title">特殊食品销售</div>
+                  <div class="lib-items lib-items-grid">
+                    <div class="lib-item" draggable="true" data-type="health-food-counter" data-shape="rect" data-label="保健食品专柜">
+                      <div class="lib-shape">💊</div><span>保健食品专柜</span>
+                    </div>
+                    <div class="lib-item" draggable="true" data-type="health-food-sign" data-shape="rect" data-label="保健食品标识牌">
+                      <div class="lib-shape">📋</div><span>保健食品标识牌</span>
+                    </div>
+                    <div class="lib-item" draggable="true" data-type="special-medical-counter" data-shape="rect" data-label="特殊医学用途配方食品专柜">
+                      <div class="lib-shape">🥛</div><span>特殊医学用途配方食品专柜</span>
+                    </div>
+                    <div class="lib-item" draggable="true" data-type="special-medical-sign" data-shape="rect" data-label="特殊医学用途配方食品标识牌">
+                      <div class="lib-shape">📋</div><span>特殊医学用途配方食品标识牌</span>
+                    </div>
+                    <div class="lib-item" draggable="true" data-type="infant-milk-counter" data-shape="rect" data-label="婴幼儿配方乳粉专柜">
+                      <div class="lib-shape">🍼</div><span>婴幼儿配方乳粉专柜</span>
+                    </div>
+                    <div class="lib-item" draggable="true" data-type="infant-milk-sign" data-shape="rect" data-label="婴幼儿配方乳粉标识牌">
+                      <div class="lib-shape">📋</div><span>婴幼儿配方乳粉标识牌</span>
+                    </div>
+                    <div class="lib-item" draggable="true" data-type="infant-food-counter" data-shape="rect" data-label="婴幼儿配方食品专柜">
+                      <div class="lib-shape">🍼</div><span>婴幼儿配方食品专柜</span>
+                    </div>
+                    <div class="lib-item" draggable="true" data-type="infant-food-sign" data-shape="rect" data-label="婴幼儿配方食品标识牌">
+                      <div class="lib-shape">📋</div><span>婴幼儿配方食品标识牌</span>
+                    </div>
+                    <div class="lib-item" draggable="true" data-type="zone-sign" data-shape="rect" data-label="专区/专柜标识牌">
+                      <div class="lib-shape">📋</div><span>专区/专柜标识牌</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="library-section collapsible collapsed" data-section="restaurant">
+              <div class="lib-title">饭店、餐馆</div>
+              <div class="lib-items">
+                <div class="library-section collapsible collapsed" data-section="hot-food">
+                  <div class="lib-title">热食类食品制售</div>
+                  <div class="lib-items lib-items-grid">
+                    <div class="lib-item" draggable="true" data-type="door" data-shape="rect" data-label="门">
+                      <div class="lib-shape">🚪</div><span>门</span>
+                    </div>
+                    <div class="lib-item" draggable="true" data-type="veg-sink" data-shape="rect" data-label="洗菜池">
+                      <div class="lib-shape">💧</div><span>洗菜池</span>
+                    </div>
+                    <div class="lib-item" draggable="true" data-type="dish-sink" data-shape="rect" data-label="洗碗池">
+                      <div class="lib-shape">💧</div><span>洗碗池</span>
+                    </div>
+                    <div class="lib-item" draggable="true" data-type="meat-sink" data-shape="rect" data-label="洗肉池">
+                      <div class="lib-shape">💧</div><span>洗肉池</span>
+                    </div>
+                    <div class="lib-item" draggable="true" data-type="fish-sink" data-shape="rect" data-label="洗鱼池">
+                      <div class="lib-shape">💧</div><span>洗鱼池</span>
+                    </div>
+                    <div class="lib-item" draggable="true" data-type="hand-wash" data-shape="rect" data-label="洗手池/洗手设施">
+                      <div class="lib-shape">💧</div><span>洗手池/洗手设施</span>
+                    </div>
+                    <div class="lib-item" draggable="true" data-type="hand-dryer" data-shape="rect" data-label="烘手机">
+                      <div class="lib-shape">🌬️</div><span>烘手机</span>
+                    </div>
+                    <div class="lib-item" draggable="true" data-type="disinfector" data-shape="rect" data-label="消毒柜">
+                      <div class="lib-shape">🧼</div><span>消毒柜</span>
+                    </div>
+                    <div class="lib-item" draggable="true" data-type="clean-cabinet" data-shape="rect" data-label="保洁柜">
+                      <div class="lib-shape">🗄️</div><span>保洁柜</span>
+                    </div>
+                    <div class="lib-item" draggable="true" data-type="freezer" data-shape="rect" data-label="冷冻柜">
+                      <div class="lib-shape">🧊</div><span>冷冻柜</span>
+                    </div>
+                    <div class="lib-item" draggable="true" data-type="cold-display" data-shape="rect" data-label="冷藏柜">
+                      <div class="lib-shape">❄️</div><span>冷藏柜</span>
+                    </div>
+                    <div class="lib-item" draggable="true" data-type="range-hood" data-shape="rect" data-label="油烟机">
+                      <div class="lib-shape">💨</div><span>油烟机</span>
+                    </div>
+                    <div class="lib-item" draggable="true" data-type="locker-room" data-shape="rect" data-label="更衣室">
+                      <div class="lib-shape">👔</div><span>更衣室</span>
+                    </div>
+                    <div class="lib-item" draggable="true" data-type="veg-rack" data-shape="rect" data-label="菜架">
+                      <div class="lib-shape">🥬</div><span>菜架</span>
+                    </div>
+                    <div class="lib-item" draggable="true" data-type="clean-veg-rack" data-shape="rect" data-label="净菜架">
+                      <div class="lib-shape">🥬</div><span>净菜架</span>
+                    </div>
+                    <div class="lib-item" draggable="true" data-type="chopstick-sterilizer" data-shape="rect" data-label="筷子消毒机">
+                      <div class="lib-shape">🥢</div><span>筷子消毒机</span>
+                    </div>
+                    <div class="lib-item" draggable="true" data-type="wine-cabinet" data-shape="rect" data-label="酒水柜">
+                      <div class="lib-shape">🍷</div><span>酒水柜</span>
+                    </div>
+                    <div class="lib-item" draggable="true" data-type="private-room" data-shape="rect" data-label="包间">
+                      <div class="lib-shape">🚪</div><span>包间</span>
+                    </div>
+                    <div class="lib-item" draggable="true" data-type="dining-area" data-shape="rect" data-label="就餐区">
+                      <div class="lib-shape">🍽️</div><span>就餐区</span>
+                    </div>
+                    <div class="lib-item" draggable="true" data-type="work-area" data-shape="rect" data-label="操作区">
+                      <div class="lib-shape">🔪</div><span>操作区</span>
+                    </div>
+                    <div class="lib-item" draggable="true" data-type="wash-area" data-shape="rect" data-label="洗消区">
+                      <div class="lib-shape">💧</div><span>洗消区</span>
+                    </div>
+                    <div class="lib-item" draggable="true" data-type="dishwasher" data-shape="rect" data-label="洗碗机">
+                      <div class="lib-shape">🧼</div><span>洗碗机</span>
+                    </div>
+                    <div class="lib-item" draggable="true" data-type="exhaust-fan" data-shape="rect" data-label="排风扇">
+                      <div class="lib-shape">💨</div><span>排风扇</span>
+                    </div>
+                    <div class="lib-item" draggable="true" data-type="stove" data-shape="circle" data-label="炉灶">
+                      <div class="lib-shape circle">🔥</div><span>炉灶</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="library-section collapsible collapsed" data-section="pastry-drink">
+                  <div class="lib-title">糕点类制售、自制饮品制售</div>
+                  <div class="lib-items lib-items-grid">
+                    <div class="lib-item" draggable="true" data-type="pastry-area" data-shape="rect" data-label="糕点制作区">
+                      <div class="lib-shape">🧁</div><span>糕点制作区</span>
+                    </div>
+                    <div class="lib-item" draggable="true" data-type="drink-area" data-shape="rect" data-label="自制饮品区">
+                      <div class="lib-shape">🥤</div><span>自制饮品区</span>
+                    </div>
+                    <div class="lib-item" draggable="true" data-type="dedicated-op-area" data-shape="rect" data-label="专用操作场所">
+                      <div class="lib-shape">🔪</div><span>专用操作场所</span>
+                    </div>
+                    <div class="lib-item" draggable="true" data-type="entrance-hand-wash" data-shape="rect" data-label="入口处设置洗手消毒设施">
+                      <div class="lib-shape">💧</div><span>入口处设置洗手消毒设施</span>
+                    </div>
+                    <div class="lib-item" draggable="true" data-type="tool-wash" data-shape="rect" data-label="工具清洗消毒设施">
+                      <div class="lib-shape">🧼</div><span>工具清洗消毒设施</span>
+                    </div>
+                    <div class="lib-item" draggable="true" data-type="dedicated-cold" data-shape="rect" data-label="专用冷藏设施">
+                      <div class="lib-shape">❄️</div><span>专用冷藏设施</span>
+                    </div>
+                    <div class="lib-item" draggable="true" data-type="work-table" data-shape="rect" data-label="制作台">
+                      <div class="lib-shape">🔪</div><span>制作台</span>
+                    </div>
+                    <div class="lib-item" draggable="true" data-type="oven" data-shape="rect" data-label="烘烤箱">
+                      <div class="lib-shape">🔥</div><span>烘烤箱</span>
+                    </div>
+                    <div class="lib-item" draggable="true" data-type="water-dispenser" data-shape="rect" data-label="饮水机">
+                      <div class="lib-shape">💧</div><span>饮水机</span>
+                    </div>
+                    <div class="lib-item" draggable="true" data-type="beverage-machine" data-shape="rect" data-label="饮料机">
+                      <div class="lib-shape">🥤</div><span>饮料机</span>
+                    </div>
+                    <div class="lib-item" draggable="true" data-type="ice-machine" data-shape="rect" data-label="制冰机">
+                      <div class="lib-shape">🧊</div><span>制冰机</span>
+                    </div>
+                    <div class="lib-item" draggable="true" data-type="soymilk-machine" data-shape="rect" data-label="豆浆机">
+                      <div class="lib-shape">🥛</div><span>豆浆机</span>
+                    </div>
+                    <div class="lib-item" draggable="true" data-type="shelf" data-shape="rect" data-label="货架">
+                      <div class="lib-shape">📦</div><span>货架</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="library-section collapsible collapsed" data-section="cake-decorating">
+                  <div class="lib-title">制作裱花蛋糕</div>
+                  <div class="lib-items lib-items-grid">
+                    <div class="lib-item" draggable="true" data-type="decorating-room" data-shape="rect" data-label="裱花专间">
+                      <div class="lib-shape">🎂</div><span>裱花专间</span>
+                    </div>
+                    <div class="lib-item" draggable="true" data-type="product-window" data-shape="rect" data-label="成品传递窗">
+                      <div class="lib-shape">🪟</div><span>成品传递窗</span>
+                    </div>
+                    <div class="lib-item" draggable="true" data-type="uv-lamp" data-shape="rect" data-label="紫外消毒灯">
+                      <div class="lib-shape">💡</div><span>紫外消毒灯</span>
+                    </div>
+                    <div class="lib-item" draggable="true" data-type="dedicated-ac" data-shape="rect" data-label="专用空调">
+                      <div class="lib-shape">❄️</div><span>专用空调</span>
+                    </div>
+                    <div class="lib-item" draggable="true" data-type="auto-door" data-shape="rect" data-label="自动闭合门">
+                      <div class="lib-shape">🚪</div><span>自动闭合门</span>
+                    </div>
+                    <div class="lib-item" draggable="true" data-type="dish-window" data-shape="rect" data-label="菜品传递窗">
+                      <div class="lib-shape">🪟</div><span>菜品传递窗</span>
+                    </div>
+                    <div class="lib-item" draggable="true" data-type="tool-wash" data-shape="rect" data-label="工具清洗消毒设施">
+                      <div class="lib-shape">🧼</div><span>工具清洗消毒设施</span>
+                    </div>
+                    <div class="lib-item" draggable="true" data-type="air-disinfect" data-shape="rect" data-label="空气消毒设施">
+                      <div class="lib-shape">💨</div><span>空气消毒设施</span>
+                    </div>
+                    <div class="lib-item" draggable="true" data-type="dedicated-cold" data-shape="rect" data-label="专用冷藏设施">
+                      <div class="lib-shape">❄️</div><span>专用冷藏设施</span>
+                    </div>
+                    <div class="lib-item" draggable="true" data-type="pedal-trash" data-shape="rect" data-label="非手动开启式垃圾桶">
+                      <div class="lib-shape">🗑️</div><span>非手动开启式垃圾桶</span>
+                    </div>
+                    <div class="lib-item" draggable="true" data-type="hand-wash" data-shape="rect" data-label="洗手">
+                      <div class="lib-shape">💧</div><span>洗手</span>
+                    </div>
+                    <div class="lib-item" draggable="true" data-type="disinfect-facility" data-shape="rect" data-label="消毒设施">
+                      <div class="lib-shape">🧼</div><span>消毒设施</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="library-section collapsible collapsed" data-section="canteen">
+              <div class="lib-title">食堂</div>
+              <div class="lib-items">
+                <div class="library-section collapsible collapsed" data-section="canteen-dedicated">
+                  <div class="lib-title">单位食堂专用区域、设施</div>
+                  <div class="lib-items lib-items-grid">
+                    <div class="lib-item" draggable="true" data-type="meal-prep-area" data-shape="rect" data-label="备餐区">
+                      <div class="lib-shape">🍽️</div><span>备餐区</span>
+                    </div>
+                    <div class="lib-item" draggable="true" data-type="sample-cabinet" data-shape="rect" data-label="留样柜">
+                      <div class="lib-shape">🗄️</div><span>留样柜</span>
+                    </div>
+                    <div class="lib-item" draggable="true" data-type="sample-box" data-shape="rect" data-label="留样盒">
+                      <div class="lib-shape">📦</div><span>留样盒</span>
+                    </div>
+                    <div class="lib-item" draggable="true" data-type="meal-prep-table" data-shape="rect" data-label="备餐台">
+                      <div class="lib-shape">🔪</div><span>备餐台</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="library-section collapsible collapsed" data-section="canteen-hot-food">
+                  <div class="lib-title">热食类食品制售</div>
+                  <div class="lib-items lib-items-grid">
+                    <div class="lib-item" draggable="true" data-type="veg-sink" data-shape="rect" data-label="洗菜池">
+                      <div class="lib-shape">💧</div><span>洗菜池</span>
+                    </div>
+                    <div class="lib-item" draggable="true" data-type="dish-sink" data-shape="rect" data-label="洗碗池">
+                      <div class="lib-shape">💧</div><span>洗碗池</span>
+                    </div>
+                    <div class="lib-item" draggable="true" data-type="dishwasher" data-shape="rect" data-label="洗碗机">
+                      <div class="lib-shape">🧼</div><span>洗碗机</span>
+                    </div>
+                    <div class="lib-item" draggable="true" data-type="meat-sink" data-shape="rect" data-label="洗肉池">
+                      <div class="lib-shape">💧</div><span>洗肉池</span>
+                    </div>
+                    <div class="lib-item" draggable="true" data-type="fish-sink" data-shape="rect" data-label="洗鱼池">
+                      <div class="lib-shape">💧</div><span>洗鱼池</span>
+                    </div>
+                    <div class="lib-item" draggable="true" data-type="hand-wash" data-shape="rect" data-label="洗手池/洗手设施">
+                      <div class="lib-shape">💧</div><span>洗手池/洗手设施</span>
+                    </div>
+                    <div class="lib-item" draggable="true" data-type="hand-dryer" data-shape="rect" data-label="烘手机">
+                      <div class="lib-shape">🌬️</div><span>烘手机</span>
+                    </div>
+                    <div class="lib-item" draggable="true" data-type="disinfector" data-shape="rect" data-label="消毒柜">
+                      <div class="lib-shape">🧼</div><span>消毒柜</span>
+                    </div>
+                    <div class="lib-item" draggable="true" data-type="clean-cabinet" data-shape="rect" data-label="保洁柜">
+                      <div class="lib-shape">🗄️</div><span>保洁柜</span>
+                    </div>
+                    <div class="lib-item" draggable="true" data-type="freezer" data-shape="rect" data-label="冷冻柜">
+                      <div class="lib-shape">🧊</div><span>冷冻柜</span>
+                    </div>
+                    <div class="lib-item" draggable="true" data-type="cold-display" data-shape="rect" data-label="冷藏柜">
+                      <div class="lib-shape">❄️</div><span>冷藏柜</span>
+                    </div>
+                    <div class="lib-item" draggable="true" data-type="range-hood" data-shape="rect" data-label="油烟机">
+                      <div class="lib-shape">💨</div><span>油烟机</span>
+                    </div>
+                    <div class="lib-item" draggable="true" data-type="exhaust-fan" data-shape="rect" data-label="排风扇">
+                      <div class="lib-shape">💨</div><span>排风扇</span>
+                    </div>
+                    <div class="lib-item" draggable="true" data-type="locker-room" data-shape="rect" data-label="更衣室">
+                      <div class="lib-shape">👔</div><span>更衣室</span>
+                    </div>
+                    <div class="lib-item" draggable="true" data-type="veg-rack" data-shape="rect" data-label="菜架">
+                      <div class="lib-shape">🥬</div><span>菜架</span>
+                    </div>
+                    <div class="lib-item" draggable="true" data-type="clean-veg-rack" data-shape="rect" data-label="净菜架">
+                      <div class="lib-shape">🥬</div><span>净菜架</span>
+                    </div>
+                    <div class="lib-item" draggable="true" data-type="chopstick-sterilizer" data-shape="rect" data-label="筷子消毒机">
+                      <div class="lib-shape">🥢</div><span>筷子消毒机</span>
+                    </div>
+                    <div class="lib-item" draggable="true" data-type="dining-area" data-shape="rect" data-label="就餐区">
+                      <div class="lib-shape">🍽️</div><span>就餐区</span>
+                    </div>
+                    <div class="lib-item" draggable="true" data-type="work-area" data-shape="rect" data-label="操作区">
+                      <div class="lib-shape">🔪</div><span>操作区</span>
+                    </div>
+                    <div class="lib-item" draggable="true" data-type="wash-area" data-shape="rect" data-label="洗消区">
+                      <div class="lib-shape">💧</div><span>洗消区</span>
+                    </div>
+                    <div class="lib-item" draggable="true" data-type="private-room" data-shape="rect" data-label="包间">
+                      <div class="lib-shape">🚪</div><span>包间</span>
+                    </div>
+                    <div class="lib-item" draggable="true" data-type="stove" data-shape="circle" data-label="炉灶">
+                      <div class="lib-shape circle">🔥</div><span>炉灶</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="library-section collapsible collapsed" data-section="cold-food">
+                  <div class="lib-title">冷食类食品制售</div>
+                  <div class="lib-items lib-items-grid">
+                    <div class="lib-item" draggable="true" data-type="uv-lamp" data-shape="rect" data-label="紫外消毒灯">
+                      <div class="lib-shape">💡</div><span>紫外消毒灯</span>
+                    </div>
+                    <div class="lib-item" draggable="true" data-type="sink" data-shape="rect" data-label="水池">
+                      <div class="lib-shape">💧</div><span>水池</span>
+                    </div>
+                    <div class="lib-item" draggable="true" data-type="covered-trash" data-shape="rect" data-label="带盖垃圾桶">
+                      <div class="lib-shape">🗑️</div><span>带盖垃圾桶</span>
+                    </div>
+                    <div class="lib-item" draggable="true" data-type="cold-dish-room" data-shape="rect" data-label="凉菜专间">
+                      <div class="lib-shape">🥗</div><span>凉菜专间</span>
+                    </div>
+                    <div class="lib-item" draggable="true" data-type="dedicated-ac" data-shape="rect" data-label="专用空调">
+                      <div class="lib-shape">❄️</div><span>专用空调</span>
+                    </div>
+                    <div class="lib-item" draggable="true" data-type="auto-door" data-shape="rect" data-label="自动闭合门">
+                      <div class="lib-shape">🚪</div><span>自动闭合门</span>
+                    </div>
+                    <div class="lib-item" draggable="true" data-type="dish-window" data-shape="rect" data-label="菜品传递窗">
+                      <div class="lib-shape">🪟</div><span>菜品传递窗</span>
+                    </div>
+                    <div class="lib-item" draggable="true" data-type="pre-entry-sink" data-shape="rect" data-label="预进间（带洗手池）">
+                      <div class="lib-shape">💧</div><span>预进间（带洗手池）</span>
+                    </div>
+                    <div class="lib-item" draggable="true" data-type="disinfect-facility" data-shape="rect" data-label="消毒设施">
+                      <div class="lib-shape">🧼</div><span>消毒设施</span>
+                    </div>
+                    <div class="lib-item" draggable="true" data-type="tool-wash" data-shape="rect" data-label="工具清洗消毒设施">
+                      <div class="lib-shape">🧼</div><span>工具清洗消毒设施</span>
+                    </div>
+                    <div class="lib-item" draggable="true" data-type="air-disinfect" data-shape="rect" data-label="空气消毒设施">
+                      <div class="lib-shape">💨</div><span>空气消毒设施</span>
+                    </div>
+                    <div class="lib-item" draggable="true" data-type="dedicated-cold" data-shape="rect" data-label="专用冷藏设施">
+                      <div class="lib-shape">❄️</div><span>专用冷藏设施</span>
+                    </div>
+                    <div class="lib-item" draggable="true" data-type="pedal-trash" data-shape="rect" data-label="非手动开启式垃圾桶">
+                      <div class="lib-shape">🗑️</div><span>非手动开启式垃圾桶</span>
+                    </div>
+                    <div class="lib-item" draggable="true" data-type="hand-disinfect" data-shape="rect" data-label="洗手消毒设施">
+                      <div class="lib-shape">💧</div><span>洗手消毒设施</span>
+                    </div>
+                    <div class="lib-item" draggable="true" data-type="wine-cabinet" data-shape="rect" data-label="酒水柜">
+                      <div class="lib-shape">🍷</div><span>酒水柜</span>
                     </div>
                   </div>
                 </div>
@@ -519,14 +982,406 @@
             </div>
           </div>
         </div>
-        <div class="library-section collapsible" data-section="basic-shape">
-          <div class="lib-title">基本形状</div>
-          <div class="lib-items lib-items-grid">
-            <div class="lib-item" draggable="true" data-type="basic-rect" data-shape="rect" data-label="矩形">
-              <div class="lib-shape">▭</div><span>矩形</span>
+        <div class="library-section collapsible collapsed" data-section="pharmacy">
+          <div class="lib-title">药店</div>
+          <div class="lib-items">
+            <div class="library-section collapsible collapsed" data-section="pharmacy-general">
+              <div class="lib-title">通用设施</div>
+              <div class="lib-items lib-items-grid">
+                <div class="lib-item" draggable="true" data-type="pillar" data-shape="rect" data-label="柱子">
+                  <div class="lib-shape">▭</div><span>柱子</span>
+                </div>
+              </div>
             </div>
-            <div class="lib-item" draggable="true" data-type="basic-circle" data-shape="circle" data-label="圆形">
-              <div class="lib-shape circle">●</div><span>圆形</span>
+            <div class="library-section collapsible collapsed" data-section="pharmacy-sanfang">
+              <div class="lib-title">三防</div>
+              <div class="lib-items lib-items-grid">
+                <div class="lib-item" draggable="true" data-type="fly-lamp" data-shape="rect" data-label="灭蝇灯">
+                  <div class="lib-shape">💡</div><span>灭蝇灯</span>
+                </div>
+                <div class="lib-item" draggable="true" data-type="fire-extinguisher" data-shape="rect" data-label="灭火器">
+                  <div class="lib-shape">🧯</div><span>灭火器</span>
+                </div>
+                <div class="lib-item" draggable="true" data-type="mouse-board" data-shape="rect" data-label="粘鼠板">
+                  <div class="lib-shape">🐭</div><span>粘鼠板</span>
+                </div>
+              </div>
+            </div>
+            <div class="library-section collapsible collapsed" data-section="pharmacy-drug">
+              <div class="lib-title">药品</div>
+              <div class="lib-items lib-items-grid">
+                <div class="lib-item" draggable="true" data-type="rx-area" data-shape="rect" data-label="处方药区">
+                  <div class="lib-shape">💊</div><span>处方药区</span>
+                </div>
+                <div class="lib-item" draggable="true" data-type="otc-area" data-shape="rect" data-label="非处方药区(OTC)">
+                  <div class="lib-shape">💊</div><span>非处方药区(OTC)</span>
+                </div>
+                <div class="lib-item" draggable="true" data-type="tcm-piece-area" data-shape="rect" data-label="中药饮片区">
+                  <div class="lib-shape">🌿</div><span>中药饮片区</span>
+                </div>
+                <div class="lib-item" draggable="true" data-type="tcm-herb-area" data-shape="rect" data-label="中药材区">
+                  <div class="lib-shape">🌿</div><span>中药材区</span>
+                </div>
+              </div>
+            </div>
+            <div class="library-section collapsible collapsed" data-section="pharmacy-device">
+              <div class="lib-title">器械</div>
+              <div class="lib-items lib-items-grid">
+                <div class="lib-item" draggable="true" data-type="device-area" data-shape="rect" data-label="医疗器械区">
+                  <div class="lib-shape">🩺</div><span>医疗器械区</span>
+                </div>
+                <div class="lib-item" draggable="true" data-type="quality-manager-area" data-shape="rect" data-label="质量负责人办公区">
+                  <div class="lib-shape">🪑</div><span>质量负责人办公区</span>
+                </div>
+              </div>
+            </div>
+            <div class="library-section collapsible collapsed" data-section="pharmacy-food">
+              <div class="lib-title">食品</div>
+              <div class="lib-items lib-items-grid">
+                <div class="lib-item" draggable="true" data-type="prepackaged-cabinet" data-shape="rect" data-label="预包装食品柜">
+                  <div class="lib-shape">📦</div><span>预包装食品柜</span>
+                </div>
+                <div class="lib-item" draggable="true" data-type="health-food-counter" data-shape="rect" data-label="保健食品专柜">
+                  <div class="lib-shape">💊</div><span>保健食品专柜</span>
+                </div>
+                <div class="lib-item" draggable="true" data-type="health-food-sign" data-shape="rect" data-label="保健食品标识牌">
+                  <div class="lib-shape">📋</div><span>保健食品标识牌</span>
+                </div>
+                <div class="lib-item" draggable="true" data-type="special-medical-counter" data-shape="rect" data-label="特殊医学用途食品专柜">
+                  <div class="lib-shape">🥛</div><span>特殊医学用途食品专柜</span>
+                </div>
+                <div class="lib-item" draggable="true" data-type="infant-food-counter" data-shape="rect" data-label="婴幼儿配方食品专柜">
+                  <div class="lib-shape">🍼</div><span>婴幼儿配方食品专柜</span>
+                </div>
+                <div class="lib-item" draggable="true" data-type="infant-food-sign" data-shape="rect" data-label="婴幼儿配方食品标识牌">
+                  <div class="lib-shape">📋</div><span>婴幼儿配方食品标识牌</span>
+                </div>
+                <div class="lib-item" draggable="true" data-type="other-infant-counter" data-shape="rect" data-label="其它婴幼儿配方食品专柜">
+                  <div class="lib-shape">🍼</div><span>其它婴幼儿配方食品专柜</span>
+                </div>
+                <div class="lib-item" draggable="true" data-type="other-infant-sign" data-shape="rect" data-label="其它婴幼儿配方食品标识牌">
+                  <div class="lib-shape">📋</div><span>其它婴幼儿配方食品标识牌</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="library-section collapsible collapsed" data-section="medical-device-sale">
+          <div class="lib-title">医疗器械销售</div>
+          <div class="lib-items">
+            <div class="library-section collapsible collapsed" data-section="retail-store">
+              <div class="lib-title">零售门店</div>
+              <div class="lib-items lib-items-grid">
+                <div class="lib-item" draggable="true" data-type="device-area" data-shape="rect" data-label="医疗器械区">
+                  <div class="lib-shape">🩺</div><span>医疗器械区</span>
+                </div>
+                <div class="lib-item" draggable="true" data-type="quality-manager-area" data-shape="rect" data-label="质量负责人办公区">
+                  <div class="lib-shape">🪑</div><span>质量负责人办公区</span>
+                </div>
+                <div class="lib-item" draggable="true" data-type="retail-counter" data-shape="rect" data-label="零售柜台">
+                  <div class="lib-shape">🪑</div><span>零售柜台</span>
+                </div>
+              </div>
+            </div>
+            <div class="library-section collapsible collapsed" data-section="sales-company">
+              <div class="lib-title">销售公司</div>
+              <div class="lib-items lib-items-grid">
+                <div class="lib-item" draggable="true" data-type="warehouse" data-shape="rect" data-label="仓库">
+                  <div class="lib-shape">📦</div><span>仓库</span>
+                </div>
+              </div>
+            </div>
+            <div class="library-section collapsible collapsed" data-section="storage-room">
+              <div class="lib-title">库房</div>
+              <div class="lib-items lib-items-grid">
+                <div class="lib-item" draggable="true" data-type="pending-area" data-shape="rect" data-label="待检区(黄色)">
+                  <div class="lib-shape">📦</div><span>待检区(黄色)</span>
+                </div>
+                <div class="lib-item" draggable="true" data-type="qualified-area" data-shape="rect" data-label="合格区（绿色）">
+                  <div class="lib-shape">✅</div><span>合格区（绿色）</span>
+                </div>
+                <div class="lib-item" draggable="true" data-type="unqualified-area" data-shape="rect" data-label="不合格区（红色）">
+                  <div class="lib-shape">❌</div><span>不合格区（红色）</span>
+                </div>
+                <div class="lib-item" draggable="true" data-type="delivery-area" data-shape="rect" data-label="发货区（绿色）">
+                  <div class="lib-shape">📤</div><span>发货区（绿色）</span>
+                </div>
+                <div class="lib-item" draggable="true" data-type="return-area" data-shape="rect" data-label="退货区">
+                  <div class="lib-shape">↩️</div><span>退货区</span>
+                </div>
+              </div>
+            </div>
+            <div class="library-section collapsible collapsed" data-section="office-place">
+              <div class="lib-title">办公场所</div>
+              <div class="lib-items lib-items-grid">
+                <div class="lib-item" draggable="true" data-type="ceo-area" data-shape="rect" data-label="总经理办公区">
+                  <div class="lib-shape">🪑</div><span>总经理办公区</span>
+                </div>
+                <div class="lib-item" draggable="true" data-type="quality-dept-area" data-shape="rect" data-label="质量部办公区">
+                  <div class="lib-shape">🪑</div><span>质量部办公区</span>
+                </div>
+                <div class="lib-item" draggable="true" data-type="finance-area" data-shape="rect" data-label="财务办公区">
+                  <div class="lib-shape">🪑</div><span>财务办公区</span>
+                </div>
+                <div class="lib-item" draggable="true" data-type="sales-dept-area" data-shape="rect" data-label="销售部办公区">
+                  <div class="lib-shape">🪑</div><span>销售部办公区</span>
+                </div>
+                <div class="lib-item" draggable="true" data-type="purchase-dept-area" data-shape="rect" data-label="采购部办公区">
+                  <div class="lib-shape">🪑</div><span>采购部办公区</span>
+                </div>
+                <div class="lib-item" draggable="true" data-type="retail-counter" data-shape="rect" data-label="零售柜台">
+                  <div class="lib-shape">🪑</div><span>零售柜台</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="library-section collapsible collapsed" data-section="public-place-permit">
+          <div class="lib-title">公共场所经营许可</div>
+          <div class="lib-items">
+            <div class="library-section collapsible collapsed" data-section="public-sanfang">
+              <div class="lib-title">三防设施</div>
+              <div class="lib-items lib-items-grid">
+                <div class="lib-item" draggable="true" data-type="no-smoking" data-shape="rect" data-label="禁烟标志">
+                  <div class="lib-shape">🚭</div><span>禁烟标志</span>
+                </div>
+                <div class="lib-item" draggable="true" data-type="disinfect-room" data-shape="rect" data-label="消毒间/消毒柜">
+                  <div class="lib-shape">🧼</div><span>消毒间/消毒柜</span>
+                </div>
+                <div class="lib-item" draggable="true" data-type="hygiene-system" data-shape="rect" data-label="卫生管理制度">
+                  <div class="lib-shape">📋</div><span>卫生管理制度</span>
+                </div>
+                <div class="lib-item" draggable="true" data-type="fly-lamp" data-shape="rect" data-label="灭蝇灯">
+                  <div class="lib-shape">💡</div><span>灭蝇灯</span>
+                </div>
+                <div class="lib-item" draggable="true" data-type="mouse-board" data-shape="rect" data-label="粘鼠板">
+                  <div class="lib-shape">🐭</div><span>粘鼠板</span>
+                </div>
+                <div class="lib-item" draggable="true" data-type="trash" data-shape="rect" data-label="垃圾桶">
+                  <div class="lib-shape">🗑️</div><span>垃圾桶</span>
+                </div>
+                <div class="lib-item" draggable="true" data-type="fire-extinguisher" data-shape="rect" data-label="灭火器">
+                  <div class="lib-shape">🧯</div><span>灭火器</span>
+                </div>
+                <div class="lib-item" draggable="true" data-type="fan" data-shape="rect" data-label="电风扇">
+                  <div class="lib-shape">🌀</div><span>电风扇</span>
+                </div>
+                <div class="lib-item" draggable="true" data-type="central-ac" data-shape="rect" data-label="集中空调">
+                  <div class="lib-shape">❄️</div><span>集中空调</span>
+                </div>
+              </div>
+            </div>
+            <div class="library-section collapsible collapsed" data-section="accommodation">
+              <div class="lib-title">住宿场所</div>
+              <div class="lib-items lib-items-grid">
+                <div class="lib-item" draggable="true" data-type="disinfect-room" data-shape="rect" data-label="消毒间/消毒柜">
+                  <div class="lib-shape">🧼</div><span>消毒间/消毒柜</span>
+                </div>
+                <div class="lib-item" draggable="true" data-type="linen-room" data-shape="rect" data-label="布草间">
+                  <div class="lib-shape">🛏️</div><span>布草间</span>
+                </div>
+                <div class="lib-item" draggable="true" data-type="trash" data-shape="rect" data-label="垃圾桶">
+                  <div class="lib-shape">🗑️</div><span>垃圾桶</span>
+                </div>
+                <div class="lib-item" draggable="true" data-type="toilet" data-shape="rect" data-label="卫生间">
+                  <div class="lib-shape">🚻</div><span>卫生间</span>
+                </div>
+                <div class="lib-item" draggable="true" data-type="uv-lamp" data-shape="rect" data-label="紫外线消毒灯">
+                  <div class="lib-shape">💡</div><span>紫外线消毒灯</span>
+                </div>
+                <div class="lib-item" draggable="true" data-type="clean-cabinet" data-shape="rect" data-label="保洁柜">
+                  <div class="lib-shape">🗄️</div><span>保洁柜</span>
+                </div>
+                <div class="lib-item" draggable="true" data-type="sink" data-shape="rect" data-label="洗手池">
+                  <div class="lib-shape">💧</div><span>洗手池</span>
+                </div>
+                <div class="lib-item" draggable="true" data-type="air-conditioner" data-shape="rect" data-label="空调">
+                  <div class="lib-shape">❄️</div><span>空调</span>
+                </div>
+                <div class="lib-item" draggable="true" data-type="central-ac" data-shape="rect" data-label="集中空调">
+                  <div class="lib-shape">❄️</div><span>集中空调</span>
+                </div>
+              </div>
+            </div>
+            <div class="library-section collapsible collapsed" data-section="beauty-salon">
+              <div class="lib-title">美容美发</div>
+              <div class="lib-items lib-items-grid">
+                <div class="lib-item" draggable="true" data-type="air-conditioner" data-shape="rect" data-label="空调">
+                  <div class="lib-shape">❄️</div><span>空调</span>
+                </div>
+                <div class="lib-item" draggable="true" data-type="disinfect-room" data-shape="rect" data-label="消毒间/消毒柜">
+                  <div class="lib-shape">🧼</div><span>消毒间/消毒柜</span>
+                </div>
+                <div class="lib-item" draggable="true" data-type="wash-basin" data-shape="rect" data-label="清洗池">
+                  <div class="lib-shape">💧</div><span>清洗池</span>
+                </div>
+                <div class="lib-item" draggable="true" data-type="locker" data-shape="rect" data-label="更衣柜">
+                  <div class="lib-shape">🗄️</div><span>更衣柜</span>
+                </div>
+                <div class="lib-item" draggable="true" data-type="clean-cabinet" data-shape="rect" data-label="保洁柜">
+                  <div class="lib-shape">🗄️</div><span>保洁柜</span>
+                </div>
+                <div class="lib-item" draggable="true" data-type="uv-lamp" data-shape="rect" data-label="紫外线消毒灯">
+                  <div class="lib-shape">💡</div><span>紫外线消毒灯</span>
+                </div>
+                <div class="lib-item" draggable="true" data-type="beauty-bed" data-shape="rect" data-label="美容床">
+                  <div class="lib-shape">🛏️</div><span>美容床</span>
+                </div>
+                <div class="lib-item" draggable="true" data-type="vent" data-shape="rect" data-label="通风口">
+                  <div class="lib-shape">💨</div><span>通风口</span>
+                </div>
+                <div class="lib-item" draggable="true" data-type="trash" data-shape="rect" data-label="垃圾桶">
+                  <div class="lib-shape">🗑️</div><span>垃圾桶</span>
+                </div>
+                <div class="lib-item" draggable="true" data-type="central-ac" data-shape="rect" data-label="集中空调">
+                  <div class="lib-shape">❄️</div><span>集中空调</span>
+                </div>
+              </div>
+            </div>
+            <div class="library-section collapsible collapsed" data-section="swimming">
+              <div class="lib-title">游泳场所</div>
+              <div class="lib-items lib-items-grid">
+                <div class="lib-item" draggable="true" data-type="locker" data-shape="rect" data-label="更衣柜">
+                  <div class="lib-shape">🗄️</div><span>更衣柜</span>
+                </div>
+                <div class="lib-item" draggable="true" data-type="disinfect-facility" data-shape="rect" data-label="消毒设施">
+                  <div class="lib-shape">🧼</div><span>消毒设施</span>
+                </div>
+                <div class="lib-item" draggable="true" data-type="self-test-board" data-shape="rect" data-label="自测公示栏">
+                  <div class="lib-shape">📋</div><span>自测公示栏</span>
+                </div>
+                <div class="lib-item" draggable="true" data-type="mechanical-vent" data-shape="rect" data-label="机械通风装置">
+                  <div class="lib-shape">💨</div><span>机械通风装置</span>
+                </div>
+                <div class="lib-item" draggable="true" data-type="child-pool" data-shape="rect" data-label="儿童涉水池">
+                  <div class="lib-shape">🏊</div><span>儿童涉水池</span>
+                </div>
+                <div class="lib-item" draggable="true" data-type="adult-pool" data-shape="rect" data-label="成人涉水池">
+                  <div class="lib-shape">🏊</div><span>成人涉水池</span>
+                </div>
+                <div class="lib-item" draggable="true" data-type="water-disinfect" data-shape="rect" data-label="水质消毒设备">
+                  <div class="lib-shape">💧</div><span>水质消毒设备</span>
+                </div>
+                <div class="lib-item" draggable="true" data-type="uv-lamp" data-shape="rect" data-label="紫外线消毒灯">
+                  <div class="lib-shape">💡</div><span>紫外线消毒灯</span>
+                </div>
+                <div class="lib-item" draggable="true" data-type="sewage-system" data-shape="rect" data-label="污水排放系统">
+                  <div class="lib-shape">💧</div><span>污水排放系统</span>
+                </div>
+                <div class="lib-item" draggable="true" data-type="utensil-disinfect-room" data-shape="rect" data-label="饮具专用消毒间">
+                  <div class="lib-shape">🧼</div><span>饮具专用消毒间</span>
+                </div>
+                <div class="lib-item" draggable="true" data-type="waste-container" data-shape="rect" data-label="放置废弃密闭物容器">
+                  <div class="lib-shape">🗑️</div><span>放置废弃密闭物容器</span>
+                </div>
+                <div class="lib-item" draggable="true" data-type="air-conditioner" data-shape="rect" data-label="空调">
+                  <div class="lib-shape">❄️</div><span>空调</span>
+                </div>
+                <div class="lib-item" draggable="true" data-type="central-ac" data-shape="rect" data-label="集中空调">
+                  <div class="lib-shape">❄️</div><span>集中空调</span>
+                </div>
+              </div>
+            </div>
+            <div class="library-section collapsible collapsed" data-section="bath-place">
+              <div class="lib-title">沐浴场所</div>
+              <div class="lib-items lib-items-grid">
+                <div class="lib-item" draggable="true" data-type="exhaust-fan" data-shape="rect" data-label="排气扇">
+                  <div class="lib-shape">💨</div><span>排气扇</span>
+                </div>
+                <div class="lib-item" draggable="true" data-type="rest-room" data-shape="rect" data-label="休息室">
+                  <div class="lib-shape">🛋️</div><span>休息室</span>
+                </div>
+                <div class="lib-item" draggable="true" data-type="locker-room" data-shape="rect" data-label="更衣室">
+                  <div class="lib-shape">👔</div><span>更衣室</span>
+                </div>
+                <div class="lib-item" draggable="true" data-type="uv-lamp" data-shape="rect" data-label="紫外线消毒灯">
+                  <div class="lib-shape">💡</div><span>紫外线消毒灯</span>
+                </div>
+                <div class="lib-item" draggable="true" data-type="bath-area" data-shape="rect" data-label="沐浴区">
+                  <div class="lib-shape">🛁</div><span>沐浴区</span>
+                </div>
+                <div class="lib-item" draggable="true" data-type="clean-cabinet" data-shape="rect" data-label="保洁柜">
+                  <div class="lib-shape">🗄️</div><span>保洁柜</span>
+                </div>
+                <div class="lib-item" draggable="true" data-type="disinfect-room" data-shape="rect" data-label="消毒间">
+                  <div class="lib-shape">🧼</div><span>消毒间</span>
+                </div>
+                <div class="lib-item" draggable="true" data-type="trash" data-shape="rect" data-label="垃圾桶">
+                  <div class="lib-shape">🗑️</div><span>垃圾桶</span>
+                </div>
+                <div class="lib-item" draggable="true" data-type="waste-container" data-shape="rect" data-label="放置废弃密闭物容器">
+                  <div class="lib-shape">🗑️</div><span>放置废弃密闭物容器</span>
+                </div>
+                <div class="lib-item" draggable="true" data-type="air-conditioner" data-shape="rect" data-label="空调">
+                  <div class="lib-shape">❄️</div><span>空调</span>
+                </div>
+                <div class="lib-item" draggable="true" data-type="central-ac" data-shape="rect" data-label="集中空调">
+                  <div class="lib-shape">❄️</div><span>集中空调</span>
+                </div>
+              </div>
+            </div>
+            <div class="library-section collapsible collapsed" data-section="concert-hall">
+              <div class="lib-title">音乐厅</div>
+              <div class="lib-items lib-items-grid">
+                <div class="lib-item" draggable="true" data-type="audience-area" data-shape="rect" data-label="观众区">
+                  <div class="lib-shape">👥</div><span>观众区</span>
+                </div>
+                <div class="lib-item" draggable="true" data-type="vent-facility" data-shape="rect" data-label="通风设施">
+                  <div class="lib-shape">💨</div><span>通风设施</span>
+                </div>
+              </div>
+            </div>
+            <div class="library-section collapsible collapsed" data-section="foot-bath">
+              <div class="lib-title">足浴场所</div>
+              <div class="lib-items lib-items-grid">
+                <div class="lib-item" draggable="true" data-type="trash" data-shape="rect" data-label="垃圾桶">
+                  <div class="lib-shape">🗑️</div><span>垃圾桶</span>
+                </div>
+                <div class="lib-item" draggable="true" data-type="clean-cabinet" data-shape="rect" data-label="保洁柜">
+                  <div class="lib-shape">🗄️</div><span>保洁柜</span>
+                </div>
+                <div class="lib-item" draggable="true" data-type="disinfect-room" data-shape="rect" data-label="消毒间">
+                  <div class="lib-shape">🧼</div><span>消毒间</span>
+                </div>
+                <div class="lib-item" draggable="true" data-type="locker-room" data-shape="rect" data-label="更衣室">
+                  <div class="lib-shape">👔</div><span>更衣室</span>
+                </div>
+                <div class="lib-item" draggable="true" data-type="air-conditioner" data-shape="rect" data-label="空调">
+                  <div class="lib-shape">❄️</div><span>空调</span>
+                </div>
+                <div class="lib-item" draggable="true" data-type="central-ac" data-shape="rect" data-label="集中空调">
+                  <div class="lib-shape">❄️</div><span>集中空调</span>
+                </div>
+              </div>
+            </div>
+            <div class="library-section collapsible collapsed" data-section="other-place">
+              <div class="lib-title">其他场所</div>
+              <div class="lib-items lib-items-grid">
+                <div class="lib-item" draggable="true" data-type="trash" data-shape="rect" data-label="垃圾桶">
+                  <div class="lib-shape">🗑️</div><span>垃圾桶</span>
+                </div>
+                <div class="lib-item" draggable="true" data-type="storage-room" data-shape="rect" data-label="存储间">
+                  <div class="lib-shape">📦</div><span>存储间</span>
+                </div>
+                <div class="lib-item" draggable="true" data-type="vent-facility" data-shape="rect" data-label="通风设施">
+                  <div class="lib-shape">💨</div><span>通风设施</span>
+                </div>
+                <div class="lib-item" draggable="true" data-type="disinfector" data-shape="rect" data-label="消毒柜">
+                  <div class="lib-shape">🧼</div><span>消毒柜</span>
+                </div>
+                <div class="lib-item" draggable="true" data-type="clean-cabinet" data-shape="rect" data-label="保洁柜">
+                  <div class="lib-shape">🗄️</div><span>保洁柜</span>
+                </div>
+                <div class="lib-item" draggable="true" data-type="uv-lamp" data-shape="rect" data-label="紫外线消毒灯">
+                  <div class="lib-shape">💡</div><span>紫外线消毒灯</span>
+                </div>
+                <div class="lib-item" draggable="true" data-type="air-conditioner" data-shape="rect" data-label="空调">
+                  <div class="lib-shape">❄️</div><span>空调</span>
+                </div>
+                <div class="lib-item" draggable="true" data-type="central-ac" data-shape="rect" data-label="集中空调">
+                  <div class="lib-shape">❄️</div><span>集中空调</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -535,17 +1390,25 @@
       <div class="canvas-container" id="canvasContainer">
         <canvas id="designCanvas" width="1189" height="841"></canvas>
       </div>
+
+      <div class="history-panel">
+        <div class="history-title">历史记录</div>
+        <button type="button" class="history-save-btn" id="historySaveBtn">💾 保存当前</button>
+        <div class="history-list" id="historyList"></div>
+      </div>
     </div>
 
     <div class="status-bar">
       <span>🔍 网格 50x50 | A4横排 (297x210mm) 居中 | 双击编辑文字（可为空） | 直线墙体已优化选中</span>
       <span>
         <button class="action-btn" id="downloadBtn" style="padding:2px 20px; margin-right:8px;">📥 下载PNG</button>
+        <button class="action-btn" id="savePdfBtn" style="padding:2px 20px; margin-right:8px;">📄 保存PDF</button>
         <button class="action-btn" id="printBtn" style="padding:2px 20px;">🖨️ 打印A4</button>
       </span>
     </div>
   </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
   <script>
     (function () {
       const canvas = document.getElementById('designCanvas');
@@ -577,6 +1440,69 @@
 
       // 保存初始状态
       let initialState = null;
+
+      // 历史记录（用户主动保存的版本，可重新编辑、删除）
+      const HISTORY_STORAGE_KEY = 'floorplan_saved_history';
+      let savedRecords = [];
+
+      function loadSavedRecords() {
+        try {
+          const raw = localStorage.getItem(HISTORY_STORAGE_KEY);
+          if (raw) savedRecords = JSON.parse(raw);
+          else savedRecords = [];
+        } catch (e) {
+          savedRecords = [];
+        }
+      }
+
+      function persistSavedRecords() {
+        try {
+          localStorage.setItem(HISTORY_STORAGE_KEY, JSON.stringify(savedRecords));
+        } catch (e) {}
+      }
+
+      function renderHistoryList() {
+        const listEl = document.getElementById('historyList');
+        if (!listEl) return;
+        listEl.innerHTML = '';
+        if (savedRecords.length === 0) {
+          listEl.innerHTML = '<div class="history-empty">暂无保存记录<br>点击「保存当前」添加</div>';
+          return;
+        }
+        savedRecords.forEach((rec, index) => {
+          const div = document.createElement('div');
+          div.className = 'history-item';
+          div.dataset.index = String(index);
+          const timeStr = rec.time || rec.id || '';
+          div.innerHTML = `
+            <div class="history-item-time">${escapeHtml(timeStr)}</div>
+            <div class="history-item-actions">
+              <button type="button" class="btn-edit">重新编辑</button>
+              <button type="button" class="btn-delete">删除</button>
+            </div>
+          `;
+          div.querySelector('.btn-edit').addEventListener('click', () => {
+            elements = JSON.parse(JSON.stringify(rec.data));
+            selectedId = null;
+            lineStartPoint = null;
+            history = [JSON.parse(JSON.stringify(elements))];
+            historyIndex = 0;
+            redrawCanvas();
+          });
+          div.querySelector('.btn-delete').addEventListener('click', () => {
+            savedRecords.splice(index, 1);
+            persistSavedRecords();
+            renderHistoryList();
+          });
+          listEl.appendChild(div);
+        });
+      }
+
+      function escapeHtml(s) {
+        const div = document.createElement('div');
+        div.textContent = s;
+        return div.innerHTML;
+      }
 
       function saveToHistory() {
         if (historyIndex < history.length - 1) {
@@ -1566,11 +2492,54 @@
           });
         }
       });
+
+      document.getElementById('historySaveBtn').addEventListener('click', () => {
+        const rec = {
+          id: Date.now(),
+          time: new Date().toLocaleString('zh-CN'),
+          data: JSON.parse(JSON.stringify(elements))
+        };
+        savedRecords.unshift(rec);
+        const MAX_SAVED = 50;
+        if (savedRecords.length > MAX_SAVED) savedRecords.pop();
+        persistSavedRecords();
+        renderHistoryList();
+      });
+
       document.getElementById('downloadBtn').addEventListener('click', () => {
         const link = document.createElement('a');
         link.download = 'floorplan_a4.png';
         link.href = canvas.toDataURL('image/png');
         link.click();
+      });
+
+      document.getElementById('savePdfBtn').addEventListener('click', () => {
+        const unitName = prompt('请输入单位名称（将显示在图纸顶部居中）：', '');
+        if (unitName == null) return; // 用户取消
+        const JsPDF = (typeof jspdf !== 'undefined' ? jspdf : window.jspdf);
+        if (!JsPDF || !JsPDF.jsPDF) {
+          alert('PDF 库未加载，请检查网络或刷新页面重试');
+          return;
+        }
+        ctx.save();
+        ctx.font = 'bold 28px "Microsoft YaHei", "PingFang SC", "SimHei", sans-serif';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'top';
+        ctx.fillStyle = '#333';
+        const topMargin = 24;
+        ctx.fillText(unitName.trim(), canvas.width / 2, topMargin);
+        const imgData = canvas.toDataURL('image/png');
+        ctx.restore();
+        redrawCanvas();
+        const pdf = new JsPDF.jsPDF({
+          orientation: 'l',
+          unit: 'mm',
+          format: 'a4'
+        });
+        const pageW = pdf.internal.pageSize.getWidth();
+        const pageH = pdf.internal.pageSize.getHeight();
+        pdf.addImage(imgData, 'PNG', 0, 0, pageW, pageH);
+        pdf.save('floorplan_a4.pdf');
       });
 
       document.getElementById('printBtn').addEventListener('click', () => {
@@ -1579,6 +2548,9 @@
         w.document.close();
         setTimeout(() => w.print(), 200);
       });
+
+      loadSavedRecords();
+      renderHistoryList();
 
       updateActive();
       redrawCanvas();
