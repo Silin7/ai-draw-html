@@ -508,7 +508,7 @@
       }
     }
   </style>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="fontawesome-free-5.15.4-web/css/all.min.css">
 </head>
 
 <body>
@@ -548,11 +548,11 @@
             <div class="lib-item" draggable="true" data-type="sector" data-shape="rect" data-label="扇形">
               <div class="lib-shape">◔</div><span>扇形</span>
             </div>
-            <div class="lib-item" draggable="true" data-type="basic-circle" data-shape="circle" data-label="圆形">
-              <div class="lib-shape circle">●</div><span>圆形</span>
+            <div class="lib-item" draggable="true" data-type="basic-circle" data-shape="icon:fa-circle" data-label="圆形">
+              <div class="lib-shape circle"><i class="fas fa-circle"></i></div><span>圆形</span>
             </div>
-            <div class="lib-item" draggable="true" data-type="ruler" data-shape="icon:fa-universal-access" data-label="标尺">
-              <div class="lib-shape"><i class="fas fa-universal-access"></i></div><span>标尺</span>
+            <div class="lib-item" draggable="true" data-type="ruler" data-shape="icon:fa-ruler-vertical" data-label="标尺">
+              <div class="lib-shape"><i class="fas fa-ruler-vertical"></i></div><span>标尺</span>
             </div>
             <!-- <div class="lib-item" draggable="true" data-type="ruler" data-shape="rect" data-label="标尺">
               <div class="lib-shape">📏</div><span>标尺</span>
@@ -565,8 +565,8 @@
             <div class="library-section collapsible collapsed" data-section="general-facility">
               <div class="lib-title">通用设施</div>
               <div class="lib-items lib-items-grid">
-                <div class="lib-item" draggable="true" data-type="fly-lamp" data-shape="rect" data-label="灭蝇灯">
-                  <div class="lib-shape">💡</div><span>灭蝇灯</span>
+                <div class="lib-item" draggable="true" data-type="fly-lamp" data-shape="icon:fa-lightbulb" data-label="灭蝇灯">
+                  <div class="lib-shape"><i class="fas fa-lightbulb"></i></div><span>灭蝇灯</span>
                 </div>
                 <div class="lib-item" draggable="true" data-type="fire-extinguisher" data-shape="icon:fa-fire-extinguisher" data-label="灭火器">
                   <div class="lib-shape"><i class="fas fa-fire-extinguisher"></i></div><span>灭火器</span>
@@ -1649,8 +1649,12 @@
         switch (iconClass) {
           case 'fa-fire-extinguisher':
             return '\uf134';
-          case 'fa-universal-access':
-            return '\uf29a';
+          case 'fa-circle':
+            return '\uf111';
+          case 'fa-lightbulb':
+            return '\uf0eb';
+          case 'fa-ruler-vertical':
+            return '\uf548';
           default:
             return null;
         }
@@ -2012,7 +2016,7 @@
             const iconChar = getIconChar(el.iconClass);
             if (iconChar) {
               ctx.save();
-              ctx.font = '900 20px "Font Awesome 6 Free", "Font Awesome 5 Free", "Font Awesome 6 Pro", sans-serif';
+              ctx.font = '900 20px "Font Awesome 5 Free", "Font Awesome 6 Free", "Font Awesome 6 Pro", sans-serif';
               ctx.textAlign = 'center';
               ctx.textBaseline = 'middle';
               ctx.fillStyle = '#1f3a4f';
