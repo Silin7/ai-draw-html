@@ -1895,21 +1895,24 @@
 
         ctx.restore();
 
-        // 绘制文字（不旋转，保持水平）- 只有当label存在且不为空、且没有图标时才绘制
-        if (!el.iconClass && el.label && el.label.trim() !== '') {
-          drawCenteredText(el.label, el.x, el.y, el.w, el.h);
+        // 绘制文字（不旋转，保持水平）- 只有当label存在且不为空时才绘制
+        if (el.label && el.label.trim() !== '') {
+          // 如果有图标，文字显示在底部
+          const position = el.iconClass ? 'bottom' : 'middle';
+          drawCenteredText(el.label, el.x, el.y, el.w, el.h, position);
         }
       }
 
-      // 绘制文字（居中显示，不旋转）
-      function drawCenteredText(text, x, y, w, h) {
+      // 绘制文字（可以指定位置，不旋转）
+      function drawCenteredText(text, x, y, w, h, position = 'middle') {
         if (!text || text.trim() === '') return;
 
         ctx.save();
         ctx.fillStyle = '#1f3a4f';
-        ctx.font = 'bold 12px "Inter", "Segoe UI", sans-serif';
+        const fontSize = Math.min(w, h) * 0.15;
+        ctx.font = `bold ${fontSize}px "Inter", "Segoe UI", sans-serif`;
         ctx.textAlign = 'center';
-        ctx.textBaseline = 'middle';
+        ctx.textBaseline = 'top';
 
         let displayText = text;
         const maxWidth = w - 10;
@@ -1920,7 +1923,16 @@
           displayText = displayText + '...';
         }
 
-        ctx.fillText(displayText, x + w / 2, y + h / 2);
+        let textY;
+        if (position === 'bottom') {
+          textY = y + h - fontSize - 2;
+        } else if (position === 'top') {
+          textY = y + 2;
+        } else {
+          textY = y + h / 2 - fontSize / 2;
+        }
+
+        ctx.fillText(displayText, x + w / 2, textY);
         ctx.restore();
       }
 
@@ -2121,23 +2133,26 @@
             ctx.stroke();
             ctx.restore();
 
-            // 只有当label存在且不为空、且没有图标时才绘制文字
-            if (!el.iconClass && el.label && el.label.trim() !== '') {
-              drawCenteredText(el.label, el.x, el.y, el.w, el.h);
+            // 只有当label存在且不为空时才绘制文字
+            if (el.label && el.label.trim() !== '') {
+              // 如果有图标，文字显示在底部
+              const position = el.iconClass ? 'bottom' : 'middle';
+              drawCenteredText(el.label, el.x, el.y, el.w, el.h, position);
             }
           }
 
-          // 如有 Font Awesome 图标，则覆盖绘制在中心（支持 rect / circle）
+          // 如有 Font Awesome 图标，则绘制在上方（支持 rect / circle）
           if (el.iconClass) {
             const iconChar = getIconChar(el.iconClass);
             if (iconChar) {
               ctx.save();
-              ctx.font = '900 20px "Font Awesome 5 Free", "Font Awesome 6 Free", "Font Awesome 6 Pro", sans-serif';
+              const iconSize = Math.min(el.w, el.h) * 0.4;
+              ctx.font = `900 ${iconSize}px "Font Awesome 5 Free", "Font Awesome 6 Free", "Font Awesome 6 Pro", sans-serif`;
               ctx.textAlign = 'center';
-              ctx.textBaseline = 'middle';
+              ctx.textBaseline = 'top';
               ctx.fillStyle = '#1f3a4f';
               const cx = el.x + el.w / 2;
-              const cy = el.y + el.h / 2;
+              const cy = el.y + el.h * 0.05;
               ctx.fillText(iconChar, cx, cy);
               ctx.restore();
             }
@@ -2164,7 +2179,7 @@
         // 绘制旋转柄
         if (currentMode === 'rotate' && selectedId) {
           const el = elements.find(e => e.id === selectedId);
-          if (el && el.shape === 'rect') {
+          if (el && (el.shape === 'rect' || el.iconClass)) {
             const centerX = el.x + el.w / 2;
             const centerY = el.y + el.h / 2;
 
@@ -2430,7 +2445,7 @@
         // 旋转模式检测
         if (currentMode === 'rotate' && selectedId) {
           const el = elements.find(e => e.id === selectedId);
-          if (el && el.shape === 'rect') {
+          if (el && (el.shape === 'rect' || el.iconClass)) {
             const centerX = el.x + el.w / 2;
             const centerY = el.y + el.h / 2;
 
@@ -2540,7 +2555,7 @@
         // 旋转处理
         if (currentMode === 'rotate' && isRotating && selectedId) {
           const el = elements.find(e => e.id === selectedId);
-          if (!el || el.shape !== 'rect') return;
+          if (!el || !(el.shape === 'rect' || el.iconClass)) return;
 
           const centerX = el.x + el.w / 2;
           const centerY = el.y + el.h / 2;
